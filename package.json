@@ -11,11 +11,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@codewithdan/observable-store": "^2.2.3",
     "async-decorator": "0.3.0",
     "kremling": "1.0.4",
     "query-string": "6.1.0",
     "react-router": "4.3.1",
     "react-router-dom": "4.3.1",
+    "rxjs": "^6.5.4",
     "single-spa-react": "2.8.1"
   },
   "devDependencies": {

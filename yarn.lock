@@ -706,6 +706,11 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@codewithdan/observable-store@^2.2.3":
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/@codewithdan/observable-store/-/observable-store-2.2.3.tgz#6d3ef20716aa886161f256211ec9ac106d97a83a"
+  integrity sha512-rpZ2Ds8wXfupnkB7nPFhNcWvuPFeXxP6L1PdNhu6CtVd5acYtNgYSJ1ndLRYhSCmfhbo3CF9gHS9o5Hjn0pfkA==
+
 "@types/events@*":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@types/events/-/events-3.0.0.tgz#2862f3f58a9a7f7c3e78d79f130dd4d71c25c2a7"
@@ -4551,7 +4556,7 @@ run-queue@^1.0.0, run-queue@^1.0.3:
   dependencies:
     aproba "^1.1.1"
 
-rxjs@^6.4.0:
+rxjs@^6.4.0, rxjs@^6.5.4:
   version "6.5.4"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.5.4.tgz#e0777fe0d184cec7872df147f303572d414e211c"
   integrity sha512-naMQXcgEo3csAEGvw/NydRA0fuS2nDZJiw1YUWFKU7aPPAPGZEsD4Iimit96qwCieH6y614MCLYwdkrWx7z/7Q==
