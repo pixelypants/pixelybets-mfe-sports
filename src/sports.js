@@ -7,7 +7,7 @@ import setPublicPath from './set-public-path.js'
 const reactLifecycles = singleSpaReact({
   React,
   ReactDOM,
-  loadRootComponent: () => import(/* webpackChunkName: "people-app" */'./root.component.js').then(property('default')),
+  loadRootComponent: () => import(/* webpackChunkName: "sports-app" */'./root.component.js').then(property('default')),
   domElementGetter,
 })
 
