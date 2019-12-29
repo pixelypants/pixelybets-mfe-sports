@@ -10,7 +10,7 @@ module.exports = {
     filename: 'sports.js',
     library: 'sports',
     libraryTarget: 'amd',
-    path: path.resolve(__dirname, 'build/sports'),
+    path: path.resolve(__dirname, 'build'),
   },
   mode: 'production',
   module: {
