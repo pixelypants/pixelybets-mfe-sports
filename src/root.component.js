@@ -1,6 +1,8 @@
 import React from 'react'
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import SportsPage from './sports-page/sports-page.component.js'
+import { ObservableStore } from '@codewithdan/observable-store';
+import { ReduxDevToolsExtension } from '@codewithdan/observable-store-extensions';
 
 export default class Root extends React.Component {
 
@@ -12,12 +14,16 @@ export default class Root extends React.Component {
     this.setState({ hasError: true })
   }
 
+  componentDidMount() {
+    ObservableStore.addExtension(new ReduxDevToolsExtension({ reactRouterHistory: history }))
+  }
+
   render() {
     return (
       this.state.hasError ? (
         <div>
           Error
-        </div>
+      </div>
       ) : (
           <BrowserRouter>
             <Route
