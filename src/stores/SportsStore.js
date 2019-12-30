@@ -1,3 +1,4 @@
+import { Observable, of } from 'rxjs';
 import { ObservableStore } from '@codewithdan/observable-store';
 
 class SportsStore extends ObservableStore {
@@ -7,13 +8,15 @@ class SportsStore extends ObservableStore {
   }
 
   fetchSports() {
+    // this.setState({ sportsLoading: true });
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
     const url = "https://api.beta.tab.com.au/v1/tab-info-service/sports/Basketball/competitions/NBA/markets?jurisdiction=NSW";
     return fetch(proxyurl + url)
       .then(response => response.json())
       .then(sports => {
-        this.setState({ Sports: sports }, SportsStoreActions.GetSports);
-        return sports;
+        this.setState({ sports: sports }, SportsStoreActions.GetSports);
+        // this.setState({ sportsLoading: false });
+        return;
       });
   }
 
@@ -24,35 +27,48 @@ class SportsStore extends ObservableStore {
   getSports() {
     let state = this.getState();
     // pull from store cache
-    if (state && state.Sports) {
-      return this.createPromise(null, state.Sports);
+    if (state && state.sports) {
+      // Return RxJS Observable
+      return of(state.sports);
     }
     // doesn't exist in store so fetch from server
     else {
-      return this.fetchSports();
+      return this.fetchSports()
+        .then(sports => {
+          return this.getState().sports
+        })
+    }
+  }
+
+  getSportsMatches() {
+    let state = this.getState();
+    // pull from store cache
+    if (state && state.sports.matches) {
+      // Return RxJS Observable
+      return of(state.sports.matches);
+    }
+    // doesn't exist in store so fetch from server
+    else {
+      return this.fetchSports()
+        .then(sports => {
+          return this.getState().sports.matches
+        })
     }
   }
 
   getSport(id) {
     return this.getSports()
       .then(sports => {
-        let filteredSports = sports.filter(sport => sport.id === id);
-        const customer = (filteredSports && filteredSports.length) ? filteredSports[0] : null;
-        this.setState({ customer }, SportsStoreActions.GetCustomer);
-        return customer;
+        let sport = sports.filter(sport => sport.spectrumUniqueId === id);
+        return sport;
       });
-  }
-
-  createPromise(err, result) {
-    return new Promise((resolve, reject) => {
-      return err ? reject(err) : resolve(result);
-    });
   }
 }
 
 export const SportsStoreActions = {
   GetSports: 'GET_SPORTS',
-  GetSport: 'GET_SPORTS'
+  GetSport: 'GET_SPORT',
+  GetLoading: 'GET_LOADING'
 };
 
 export default new SportsStore();

@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 import AsyncDecorator from 'async-decorator/rx6'
 import { Scoped } from 'kremling'
 import styles from './sports-page.krem.css'
+import SportsList from "../sports-list/sports-list.component";
 
 import SportsStore from "../stores/SportsStore";
 
@@ -10,7 +11,7 @@ export default class SportsPage extends React.Component {
 
   state = {
     loadingSports: false,
-    sports: [],
+    matches: []
   }
   storeSub = null
 
@@ -19,15 +20,16 @@ export default class SportsPage extends React.Component {
     // Option 1: Subscribe to store changes
     this.storeSub = SportsStore.stateChanged.subscribe(state => {
       if (state) {
-        this.setState({ sports: state.sports });
+        // this.setState({ loadingSports: state.sportsLoading });
+        console.log(state)
       }
     })
 
-
     // Option 2: Get data directly from store
-    SportsStore.getSports()
-      .then(cusportsstomers => {
-        this.setState({ sports: sports });
+    SportsStore.getSportsMatches()
+      .then(matches => {
+        console.log("get matches")
+        this.setState({ matches: matches });
       })
   }
 
@@ -44,9 +46,17 @@ export default class SportsPage extends React.Component {
                     Loading ...
                   </div>
                 ) : (
-                    <div>
-                      Sports Page
-                </div>
+                    <SportsList
+                      matches={this.state.matches}
+                    />
+
+                    // <div>
+                    //   {this.state.matches.map((item, index) => (
+                    //     <button key={index}>
+                    //       {item.name}
+                    //     </button>
+                    //   ))}
+                    // </div>
                   )
               }
             </div>

@@ -15,6 +15,7 @@ export default class Root extends React.Component {
   }
 
   componentDidMount() {
+    // TODO: Need to make this global for all MFEs
     ObservableStore.addExtension(new ReduxDevToolsExtension({ reactRouterHistory: history }))
   }
 
