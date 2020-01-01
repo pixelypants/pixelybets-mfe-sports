@@ -20,17 +20,16 @@ export default class SportsPage extends React.Component {
     // Option 1: Subscribe to store changes
     this.storeSub = SportsStore.stateChanged.subscribe(state => {
       if (state) {
-        // this.setState({ loadingSports: state.sportsLoading });
-        console.log(state)
+        this.setState({ matches: state.sports.matches });
       }
     })
-
+    SportsStore.fetchSports();
     // Option 2: Get data directly from store
-    SportsStore.getSportsMatches()
-      .then(matches => {
-        console.log("get matches")
-        this.setState({ matches: matches });
-      })
+    // SportsStore.getSportsMatches()
+    //   .then(matches => {
+    //     console.log("get matches")
+    //     this.setState({ matches: matches });
+    //   })
   }
 
   render() {

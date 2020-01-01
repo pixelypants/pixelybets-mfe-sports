@@ -14,11 +14,6 @@ export default class Root extends React.Component {
     this.setState({ hasError: true })
   }
 
-  componentDidMount() {
-    // TODO: Need to make this global for all MFEs
-    ObservableStore.addExtension(new ReduxDevToolsExtension({ reactRouterHistory: history }))
-  }
-
   render() {
     return (
       this.state.hasError ? (

@@ -35,7 +35,7 @@ class SportsStore extends ObservableStore {
     else {
       return this.fetchSports()
         .then(sports => {
-          return this.getState().sports
+          return of(this.getState().sports)
         })
     }
   }
