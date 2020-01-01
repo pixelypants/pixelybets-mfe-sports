@@ -16,20 +16,12 @@ export default class SportsPage extends React.Component {
   storeSub = null
 
   componentDidMount() {
-    // ###### SportsStore ########
-    // Option 1: Subscribe to store changes
     this.storeSub = SportsStore.stateChanged.subscribe(state => {
       if (state) {
         this.setState({ matches: state.sports.matches });
       }
     })
     SportsStore.fetchSports();
-    // Option 2: Get data directly from store
-    // SportsStore.getSportsMatches()
-    //   .then(matches => {
-    //     console.log("get matches")
-    //     this.setState({ matches: matches });
-    //   })
   }
 
   render() {
@@ -48,14 +40,6 @@ export default class SportsPage extends React.Component {
                     <SportsList
                       matches={this.state.matches}
                     />
-
-                    // <div>
-                    //   {this.state.matches.map((item, index) => (
-                    //     <button key={index}>
-                    //       {item.name}
-                    //     </button>
-                    //   ))}
-                    // </div>
                   )
               }
             </div>

@@ -12,7 +12,7 @@ export default class SportsList extends React.Component {
     const { matches } = this.props
     return (
       <Scoped postcss={styles}>
-        <div className='peopleList'>
+        <div className='sportsList'>
           <Fragment>
             {
               matches.map((match, index) => {
