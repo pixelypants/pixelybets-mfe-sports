@@ -4,7 +4,7 @@ import { Scoped } from 'kremling'
 import styles from './sports-page.krem.css'
 import SportsList from "../sports-list/sports-list.component";
 
-import SportsStore from "../stores/SportsStore";
+import SportsStore from "@portal/sportsStore";
 
 @AsyncDecorator
 export default class SportsPage extends React.Component {
@@ -37,9 +37,12 @@ export default class SportsPage extends React.Component {
                     Loading ...
                   </div>
                 ) : (
-                    <SportsList
-                      matches={this.state.matches}
-                    />
+                    <div>
+                      <p>Pick a sport:</p>
+                      <SportsList
+                        matches={this.state.matches}
+                      />
+                    </div>
                   )
               }
             </div>
