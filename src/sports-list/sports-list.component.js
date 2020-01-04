@@ -4,26 +4,29 @@ import { getPeople } from '../utils/api.js'
 import styles from './sports-list.krem.css'
 import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
+import uuid from "uuid"
 
 @withRouter
 export default class SportsList extends React.Component {
-
   render() {
-    const { matches } = this.props
+    const { matches, onClick } = this.props
     return (
       <Scoped postcss={styles}>
-        <div className='sportsList'>
+        <div className='sportsList' id='sportsList'>
           <Fragment>
             {
               matches.map((match, index) => {
                 return (
-                  <Link
-                    key={match.name}
-                    className='match'
-                    to={`/`}
-                  >
-                    {match.name}
-                  </Link>
+                  <button key={uuid.v1()} id={match.id} className='match' onClick={e => {
+                    onClick({
+                      id: match.id,
+                      name: match.name,
+                      amount: 222
+                    });
+                  }
+                  }>
+                    {match.id + " : " + match.name + " : $222"}
+                  </button>
                 )
               })
             }

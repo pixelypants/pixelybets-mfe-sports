@@ -30,6 +30,14 @@ export const unload = [
   reactLifecycles.unload,
 ]
 
+export const devtools = {
+  overlays: {
+    selectors: [
+      ".sportsPage",
+    ],
+  }
+}
+
 function domElementGetter() {
   let el = document.getElementById("sports");
   if (!el) {

@@ -1,17 +1,13 @@
-.match {
-  height: 50px;
+.sportsList {
   display: flex;
-  align-items: center;
-  border-bottom: 1px solid var(--white);
-  cursor: pointer;
-  text-decoration: none;
-  color: var(--white);
+  flex-direction: column;
 }
 
-.match:last-child {
-  border-bottom: none;
+.match {
+  height: 30px;
+  margin-bottom: 5px;
 }
 
-.match:first-child {
-  border-top: 1px solid var(--white);
+.match.active {
+  background-color: red;
 }

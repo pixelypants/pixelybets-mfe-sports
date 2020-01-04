@@ -1,19 +1,14 @@
 .sportsPageContents {
   display: flex;
+  flex-direction: column;
 }
 
 .listWrapper {
   padding: 24px;
-  width: 30%;
-}
-
-.selectedWrapper {
-  width: 70%;
-  border-left: 2px solid var(--white);
-  padding: 24px;
 }
 
 .sportsPage {
-  height: calc(100% - var(--navbar-height));
+  height: 400px;
+  width:300px;
 }
 
