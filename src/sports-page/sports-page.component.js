@@ -11,16 +11,15 @@ import BetslipStore from "@portal/betslipStore";
 @AsyncDecorator
 export default class SportsPage extends React.Component {
 
-  state = {
-    loadingSports: false,
-    matches: []
-  }
-  sportsStoreSub = null
-  betslipStoreSub = null
-
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
+    this.state = {
+      loadingSports: false,
+      matches: []
+    }
+    this.sportsStoreSub = null
+    this.betslipStoreSub = null
   }
 
   componentDidMount() {
@@ -32,14 +31,15 @@ export default class SportsPage extends React.Component {
     SportsStore.fetchSports();
 
     this.betslipStoreSub = BetslipStore.stateChanged.subscribe(state => {
-      if (state.bets.length > 0) {
-        const list = document.getElementById("sportsList");
-        const btns = list.getElementsByClassName("match");
-        for (var i = 0; i < btns.length; i++) {
-          //if (of(bets).find(bet => bet.id === btns[i].id)) {
-          btns[i].classList.remove("mystyle");
-          //}
+      const list = document.getElementById("sportsList");
+      if (!list) return
+      const btns = list.getElementsByClassName("match");
+      for (var i = 0; i < btns.length; i++) {
+        if (btns[i].classList.contains("active")) {
+          btns[i].classList.remove("active");
         }
+      }
+      if (state.bets.length > 0) {
         state.bets.map(bet => {
           const uiBet = document.getElementById(bet.id);
           uiBet.className += " active"
@@ -48,6 +48,10 @@ export default class SportsPage extends React.Component {
     })
   }
 
+  componentWillUnmount() {
+    this.sportsStoreSub.unsubscribe();
+    this.betslipStoreSub.unsubscribe();
+  }
 
   handleClick(bet) {
     BetslipStore.addBet(bet);
@@ -59,19 +63,17 @@ export default class SportsPage extends React.Component {
       <Scoped postcss={styles}>
         <div className='sportsPage'>
           <div className='sportsPageContents'>
+            <h1>Sports bets:</h1>
             {
-              this.state.loadingSports && sports.length === 0 ? (
+              this.state.matches.length === 0 ? (
                 <div>
                   Loading ...
-                  </div>
+                </div>
               ) : (
-                  <div>
-                    <h1>Sports bets:</h1>
-                    <SportsList
-                      matches={this.state.matches}
-                      onClick={this.handleClick}
-                    />
-                  </div>
+                  <SportsList
+                    matches={this.state.matches}
+                    onClick={this.handleClick}
+                  />
                 )
             }
           </div>

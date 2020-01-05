@@ -6,7 +6,6 @@ import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
 import uuid from "uuid"
 
-@withRouter
 export default class SportsList extends React.Component {
   render() {
     const { matches, onClick } = this.props
